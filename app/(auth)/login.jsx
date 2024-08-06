@@ -1,9 +1,10 @@
 
 import { CustomButton, FormField } from '../../components'
-import { View, Text, ScrollView } from 'react-native'
+import { View, Text, ScrollView, Alert } from 'react-native'
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useState } from "react";
 import { Link, router } from "expo-router";
+import { FullWindowOverlay } from 'react-native-screens';
 
 
 function login() {
@@ -15,8 +16,21 @@ function login() {
     })
 
     const submit = async () => {
-        console.log('login form', form)
+        if(form.email === "" || form.password === "") {
+            Alert.alert('Error', "Please fill in all fields"); 
+        }
+        setSubmitting(true); 
+        try {
+            console.log(...form);
+            setSubmitting (false);
+            window.href('/')
+        } catch (error) {
+            Alert.alert('Error', error.message);
+        } finally {
+            setSubmitting(false);
+        } 
     }
+
     return (
         <SafeAreaView>
             <ScrollView>
