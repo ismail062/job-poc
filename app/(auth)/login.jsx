@@ -3,8 +3,8 @@ import { CustomButton, FormField } from '../../components'
 import { View, Text, ScrollView, Alert } from 'react-native'
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useState } from "react";
-import { Link, router } from "expo-router";
-import { FullWindowOverlay } from 'react-native-screens';
+import { Link } from "expo-router";
+
 
 
 function login() {
@@ -35,7 +35,7 @@ function login() {
         <SafeAreaView>
             <ScrollView>
                 <View>
-                    <Text>
+                    <Text className="bg-primary h-full">
                         Welcome to Job Portal
                     </Text>
 
