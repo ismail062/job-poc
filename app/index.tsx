@@ -1,26 +1,41 @@
-import React from "react";
+import { StatusBar } from "expo-status-bar";
 import { Redirect, router } from "expo-router";
-import { ScrollView, Text, View } from "react-native";
+import { View, Text, Image, ScrollView, Button } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { CustomButton } from "@/components";
 
-function HomeScreen() {
+// import { images } from "../constants";
+import { CustomButton } from "../components";
+// import { useGlobalContext } from "../context/GlobalProvider";
+
+const Welcome = () => {
   return (
-    <SafeAreaView className="h-full">
-      <ScrollView>
-        <View>
-          <Text> Welcome to Novuna Job Portal</Text>
-        </View>
-        <View>
-          <CustomButton
-            title="Continue with Email"
-            handlePress={() => router.push("/login")}
-            containerStyles="w-full mt-7"
-          />
+    <SafeAreaView className="bg-primary h-full">
+      <ScrollView
+        contentContainerStyle={{
+          height: "100%",
+        }}
+      >
+        <View className="w-full flex justify-center items-center h-full px-4">
+          <View className="relative mt-5">
+            <Text className="text-3xl text-white font-bold text-center">
+              Welcome to <Text className="text-secondary-200">Novuna</Text> Job
+              Portal
+            </Text>
+          </View>
+
+          <Text className="text-sm font-pregular text-gray-100 mt-7 text-center">
+            Make your job search easier with us.{"\n"} Sign up to get started
+            and apply your dream job.{"\n"}
+          </Text>
+          <CustomButton title="Continue with Email"
+            handlePress={() => router.push("/profile")}
+            containerStyles="w-full mt-7"/>
+            
         </View>
       </ScrollView>
+      <StatusBar backgroundColor="#161622" style="light" />
     </SafeAreaView>
   );
-}
+};
 
-export default HomeScreen;
+export default Welcome;
