@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View, Text, ScrollView, Dimensions, Alert, } from "react-native";
+import { emailRegex } from "../../constants";
 
 import { CustomButton, FormField } from "../../components";
 
@@ -15,8 +16,19 @@ const register = () => {
   });
 
   const submit = async () => {
-    if (form.username === "" || form.email === "" || form.password === "") {
+    if (form.email === "" || form.password === "" || form.confirm_password === "") {
       Alert.alert("Error", "Please fill in all fields");
+      return;
+    }
+
+    if(!emailRegex.test(form.email)) {
+        Alert.alert("Error", "Invalid email address");
+        return;
+    }
+
+    if(form.password !== form.confirm_password) {
+        Alert.alert("Error", "Passwords do not match");
+        return;
     }
 
     setSubmitting(true);
@@ -54,15 +66,15 @@ const register = () => {
           <FormField
             title="Password"
             value={form.password}
-            handleChangeText={(e) => setForm({ ...form, email: e })}
+            handleChangeText={(e) => setForm({ ...form, password: e })}
             otherStyles="mt-7"
             keyboardType="password"
           />
 
           <FormField
             title="Confirm Password"
-            value={form.password}
-            handleChangeText={(e) => setForm({ ...form, password: e })}
+            value={form.confirm_password}
+            handleChangeText={(e) => setForm({ ...form, confirm_password: e })}
             otherStyles="mt-7"
           />
 

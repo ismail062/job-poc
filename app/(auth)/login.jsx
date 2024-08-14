@@ -2,11 +2,11 @@ import { useState } from "react";
 import { Link, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View, Text, ScrollView, Dimensions, Alert, Image } from "react-native";
+import { emailRegex } from "../../constants";
 
 import { CustomButton, FormField } from "../../components";
 
 const login = () => {
-
   const [isSubmitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
     email: "",
@@ -16,13 +16,17 @@ const login = () => {
   const submit = async () => {
     if (form.email === "" || form.password === "") {
       Alert.alert("Error", "Please fill in all fields");
+      return;
+    }
+
+    if (!emailRegex.test(form.email)) {
+      Alert.alert("Error", "Invalid email address");
+      return;
     }
 
     setSubmitting(true);
 
     try {
-
-
       Alert.alert("Success", "User signed in successfully");
       router.replace("/home");
     } catch (error) {
@@ -41,10 +45,9 @@ const login = () => {
             minHeight: Dimensions.get("window").height - 100,
           }}
         >
-          
-
           <Text className="text-2xl font-semibold text-white mt-10 font-psemibold">
-            Log in to <Text className="text-secondary-200">Novuna</Text> Job Portal
+            Log in to <Text className="text-secondary-200">Novuna</Text> Job
+            Portal
           </Text>
 
           <FormField
