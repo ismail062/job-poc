@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { FlatList, RefreshControl, Text, View } from "react-native";
+import { FlatList, RefreshControl, Text, TouchableOpacity, View } from "react-native";
 
 import { EmptyState, JobCard } from "../../components";
+import { router } from "expo-router";
 
 const Home = () => {
   const [jobs, setJobs] = useState([
@@ -50,6 +51,8 @@ const Home = () => {
 
   const [refreshing, setRefreshing] = useState(false);
 
+  const handleCardClick = () => router.push('/profile');
+
   const onRefresh = async () => {
     setRefreshing(true);
     setRefreshing(false);
@@ -62,6 +65,9 @@ const Home = () => {
         data={jobs}
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
+          <TouchableOpacity
+          onPress={handleCardClick}
+          >
           <JobCard
             title={item.title}
             companyName={item.companyName}
@@ -71,7 +77,7 @@ const Home = () => {
             date={item.publishedDate}
             status={item.status}
           />
-          
+          </TouchableOpacity>
         )}
         ListHeaderComponent={() => (
           <View className="flex my-6 px-4 space-y-6">
