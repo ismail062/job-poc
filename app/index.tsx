@@ -28,7 +28,7 @@ const Welcome = () => {
             and apply your dream job.{"\n"}
           </Text>
           <CustomButton title="Continue with Email"
-            handlePress={() => router.push("/login")}
+            handlePress={() => router.push("/home")}
             containerStyles="w-full mt-7"/>
             
         </View>
