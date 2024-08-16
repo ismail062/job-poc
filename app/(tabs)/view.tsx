@@ -1,11 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 const view = () => {
   return (
-    <View>
-      <Text>view</Text>
-    </View>
+    <SafeAreaView className="bg-primary">
+      <View>
+        <Text>view</Text>
+      </View>
+    </SafeAreaView>
+
   )
 }
 
