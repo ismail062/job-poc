@@ -51,8 +51,6 @@ const Home = () => {
 
   const [refreshing, setRefreshing] = useState(false);
 
-  const handleCardClick = () => router.push('/jobs/1');
-
   const onRefresh = async () => {
     setRefreshing(true);
     setRefreshing(false);
@@ -66,7 +64,7 @@ const Home = () => {
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
           <TouchableOpacity
-          onPress={handleCardClick}
+          onPress={() => router.push(`/jobs/${item.$id}`)}
           >
           <JobCard
             title={item.title}

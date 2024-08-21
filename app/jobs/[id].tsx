@@ -1,22 +1,19 @@
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { CustomButton } from "../../components";
-import { useLocalSearchParams } from "expo-router";
+import { Stack, useLocalSearchParams, router } from "expo-router";
+
 
 const JobDetails = () => {
   const { id } = useLocalSearchParams();
   return (
     <SafeAreaView>
+      <Stack.Screen options={{ headerTitle: "", headerBackTitle: "back"}}/>
+      <>
       <ScrollView>
         <View className="p-4">
           <Text className="text-xl font-pbold text-gray-800">
-            Software Engineer { id }
+            Software Engineer
           </Text>
-          <CustomButton
-            title="Apply Now"
-            handlePress={() => alert("Applied")}
-            containerStyles="min-w-24 mt-2"
-          />
           <Text className="text-sm font-pregular text-gray-400 mt-1">
             Google
           </Text>
@@ -78,6 +75,7 @@ const JobDetails = () => {
           </Text>
         </View>
       </ScrollView>
+      </>
     </SafeAreaView>
   );
 };

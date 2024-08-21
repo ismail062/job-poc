@@ -27,8 +27,11 @@ const login = () => {
     setSubmitting(true);
 
     try {
-      Alert.alert("Success", "User signed in successfully");
+      if(form.password === "1234567") {
+        Alert.alert("Success", "User signed in successfully");
       router.replace("/home");
+      }
+      
     } catch (error) {
       Alert.alert("Error", error.message);
     } finally {

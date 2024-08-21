@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import { EvilIcons, MaterialIcons } from "@expo/vector-icons";
+const reactlogo = require("../assets/images/react-logo.png");
 const JobCard = ({
   title,
   companyName,
@@ -17,10 +18,8 @@ const JobCard = ({
   };
 
   return (
-    <View className="flex flex-col bg-white p-2 rounded-lg shadow-md mb-1">
-      <View className="pt-2">
-        <Image source={logo} className="w-5 h-5" resizeMode="contain" />
-      </View>
+  
+   <View className="flex flex-col bg-white p-2 rounded-lg shadow-md mb-1">
       <View className="flex flex-row items-center mt-2">
       
         <Text className="text-2xl text-black-400 font-pregular ml-2">
@@ -45,6 +44,7 @@ const JobCard = ({
         <Text className="text-sm text-black-400 font-pregular ml-1">
           {companyName}
         </Text>
+        <Image source={logo} className="w-10 h-10 ml-4" resizeMode="contain" />
       </View>
       <View className="flex flex-row items-center mt-2">
         <EvilIcons name="location" size={24} color="black" />
