@@ -3,6 +3,7 @@ import FormField from './FormField';
 import InfoBox from './InfoBox';
 import JobCard from './JobCard';
 import EmptyState from './EmptyState';
+import JobFooter from './JobFooter';
 
 
 export {
@@ -11,4 +12,5 @@ export {
     InfoBox,
     JobCard,
     EmptyState,
+    JobFooter,
 }

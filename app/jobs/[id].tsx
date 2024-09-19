@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import {  Text, View, ScrollView, } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Stack, useLocalSearchParams, router } from "expo-router";
+import { Stack, useLocalSearchParams } from "expo-router";
+import { JobFooter } from "@/components";
 
 
 const JobDetails = () => {
@@ -9,6 +10,7 @@ const JobDetails = () => {
     <SafeAreaView>
       <Stack.Screen options={{ headerTitle: "", headerBackTitle: "back"}}/>
       <>
+      <JobFooter url={id? `/jobs/${id}/apply` : '/jobs/applications'} />
       <ScrollView>
         <View className="p-4">
           <Text className="text-xl font-pbold text-gray-800">
@@ -75,6 +77,7 @@ const JobDetails = () => {
           </Text>
         </View>
       </ScrollView>
+      
       </>
     </SafeAreaView>
   );
