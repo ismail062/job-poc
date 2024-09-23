@@ -1,83 +1,121 @@
-import {  Text, View, ScrollView, } from "react-native";
+import { Text, View, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { JobFooter } from "@/components";
-
+import { EvilIcons, MaterialIcons } from "@expo/vector-icons";
 
 const JobDetails = () => {
   const { id } = useLocalSearchParams();
   return (
     <SafeAreaView>
-      <Stack.Screen options={{ headerTitle: "", headerBackTitle: "back"}}/>
+      <Stack.Screen options={{ headerTitle: "", headerBackTitle: "back" }} />
       <>
-      <JobFooter url={id? `/jobs/${id}/apply` : '/jobs/applications'} />
-      <ScrollView>
-        <View className="p-4">
+        <JobFooter url={id ? `/jobs/${id}/apply` : "/jobs/applications"} />
+        <ScrollView>
           <Text className="text-xl font-pbold text-gray-800">
             Software Engineer
           </Text>
-          <Text className="text-sm font-pregular text-gray-400 mt-1">
-            Google
-          </Text>
-          <Text className="text-sm font-pregular text-gray-400 mt-1">
-            Remote
-          </Text>
-          <Text className="text-sm font-pregular text-gray-400 mt-1">
-            $120,000
-          </Text>
-          <Text className="text-sm font-pregular text-gray-400 mt-1">
-            1d ago
-          </Text>
-          <Text className="text-sm font-pregular text-gray-400 mt-1">Open</Text>
-        </View>
-        <View className="p-4">
-          <Text className="text-lg font-pbold text-gray-800">Description</Text>
-          <Text className="text-sm font-pregular text-gray-400 mt-1">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec
-            dui sed mi ultricies aliquet. Nulla facilisi. In hac habitasse
-            platea dictumst. Nullam nec ultricies nunc. Donec euismod, nunc non
-            aliquam tincidunt, odio turpis ultricies metus, vitae luctus turpis
-            erat at nunc. Donec euismod, nunc non aliquam tincidunt, odio turpis
-            ultricies metus, vitae luctus turpis erat at nunc.
-          </Text>
-        </View>
-        <View className="p-4">
-          <Text className="text-lg font-pbold text-gray-800">
-            Responsibilities
-          </Text>
-          <Text className="text-sm font-pregular text-gray-400 mt-1">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec
-            dui sed mi ultricies aliquet. Nulla facilisi. In hac habitasse
-            platea dictumst. Nullam nec ultricies nunc. Donec euismod, nunc non
-            aliquam tincidunt, odio turpis ultricies metus, vitae luctus turpis
-            erat at nunc. Donec euismod, nunc non aliquam tincidunt, odio turpis
-            ultricies metus, vitae luctus turpis erat at nunc.
-          </Text>
-        </View>
-        <View className="p-4">
-          <Text className="text-lg font-pbold text-gray-800">Requirements</Text>
-          <Text className="text-sm font-pregular text-gray-400 mt-1">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec
-            dui sed mi ultricies aliquet. Nulla facilisi. In hac habitasse
-            platea dictumst. Nullam nec ultricies nunc. Donec euismod, nunc non
-            aliquam tincidunt, odio turpis ultricies metus, vitae luctus turpis
-            erat at nunc. Donec euismod, nunc non aliquam tincidunt, odio turpis
-            ultricies metus, vitae luctus turpis erat at nunc.
-          </Text>
-        </View>
-        <View className="p-4">
-          <Text className="text-lg font-pbold text-gray-800">Benefits</Text>
-          <Text className="text-sm font-pregular text-gray-400 mt-1">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec
-            dui sed mi ultricies aliquet. Nulla facilisi. In hac habitasse
-            platea dictumst. Nullam nec ultricies nunc. Donec euismod, nunc non
-            aliquam tincidunt, odio turpis ultricies metus, vitae luctus turpis
-            erat at nunc. Donec euismod, nunc non aliquam tincidunt, odio turpis
-            ultricies metus, vitae luctus turpis erat at nunc.
-          </Text>
-        </View>
-      </ScrollView>
-      
+          <View className="flex flex-row items-center mt-2">
+            <Text className="text-sm text-black-400 font-pregular ml-1">
+              Google
+            </Text>
+          </View>
+          <View className="flex flex-row flex-wrap mt-2">
+            <View className="w-1/2 mb-2">
+              <View className="flex flex-row items-center">
+                <EvilIcons name="location" size={24} color="black" />
+                <Text className="text-sm text-black-400 font-pregular ml-2">
+                  Remote
+                </Text>
+              </View>
+            </View>
+
+            <View className="w-1/2 mb-2">
+              <View className="flex flex-row items-center">
+                <MaterialIcons
+                  name="currency-exchange"
+                  size={20}
+                  color="black"
+                />
+                <Text className="text-sm text-black-400 font-pregular ml-2">
+                  $120,000
+                </Text>
+              </View>
+            </View>
+
+            <View className="w-1/2 mb-2">
+              <View className="flex flex-row items-center">
+                <EvilIcons name="calendar" size={24} color="black" />
+                <Text className="text-sm text-black-400 font-pregular ml-2">
+                  1 day ago
+                </Text>
+              </View>
+            </View>
+
+            <View className="w-1/2 mb-2">
+              <View className="flex flex-row items-center">
+                <MaterialIcons
+                  name="signal-wifi-statusbar-null"
+                  size={24}
+                  color="black"
+                />
+                <Text className="text-sm text-black-400 font-pregular ml-2">
+                  Open
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View className="p-4">
+            <Text className="text-lg font-pbold text-gray-800">
+              Description
+            </Text>
+            <Text className="text-sm font-pregular text-gray-400 mt-1">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec
+              dui sed mi ultricies aliquet. Nulla facilisi. In hac habitasse
+              platea dictumst. Nullam nec ultricies nunc. Donec euismod, nunc
+              non aliquam tincidunt, odio turpis ultricies metus, vitae luctus
+              turpis erat at nunc. Donec euismod, nunc non aliquam tincidunt,
+              odio turpis ultricies metus, vitae luctus turpis erat at nunc.
+            </Text>
+          </View>
+          <View className="p-4">
+            <Text className="text-lg font-pbold text-gray-800">
+              Responsibilities
+            </Text>
+            <Text className="text-sm font-pregular text-gray-400 mt-1">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec
+              dui sed mi ultricies aliquet. Nulla facilisi. In hac habitasse
+              platea dictumst. Nullam nec ultricies nunc. Donec euismod, nunc
+              non aliquam tincidunt, odio turpis ultricies metus, vitae luctus
+              turpis erat at nunc. Donec euismod, nunc non aliquam tincidunt,
+              odio turpis ultricies metus, vitae luctus turpis erat at nunc.
+            </Text>
+          </View>
+          <View className="p-4">
+            <Text className="text-lg font-pbold text-gray-800">
+              Requirements
+            </Text>
+            <Text className="text-sm font-pregular text-gray-400 mt-1">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec
+              dui sed mi ultricies aliquet. Nulla facilisi. In hac habitasse
+              platea dictumst. Nullam nec ultricies nunc. Donec euismod, nunc
+              non aliquam tincidunt, odio turpis ultricies metus, vitae luctus
+              turpis erat at nunc. Donec euismod, nunc non aliquam tincidunt,
+              odio turpis ultricies metus, vitae luctus turpis erat at nunc.
+            </Text>
+          </View>
+          <View className="p-4">
+            <Text className="text-lg font-pbold text-gray-800">Benefits</Text>
+            <Text className="text-sm font-pregular text-gray-400 mt-1">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec
+              dui sed mi ultricies aliquet. Nulla facilisi. In hac habitasse
+              platea dictumst. Nullam nec ultricies nunc. Donec euismod, nunc
+              non aliquam tincidunt, odio turpis ultricies metus, vitae luctus
+              turpis erat at nunc. Donec euismod, nunc non aliquam tincidunt,
+              odio turpis ultricies metus, vitae luctus turpis erat at nunc.
+            </Text>
+          </View>
+        </ScrollView>
       </>
     </SafeAreaView>
   );

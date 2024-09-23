@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Avatar, Chip, Card } from "react-native-paper";
+import { Avatar, Chip, Card, Divider, IconButton, Tooltip, Button } from "react-native-paper";
+import { EvilIcons, MaterialIcons } from "@expo/vector-icons";
 
 import {
   FlatList,
@@ -12,7 +13,6 @@ import {
 } from "react-native";
 
 import { router } from "expo-router";
-import { CustomButton, FormField } from "../../components";
 
 const profile = () => {
   const [profile, setProfile] = useState({
@@ -59,9 +59,30 @@ const profile = () => {
   return (
     <SafeAreaView className="bg-primary">
       <ScrollView>
-        <View className="px-4 m-1">
+        <View className="p-1">
           <Card className="m-1">
-            <Card.Title title="Personal Information" />
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: 16,
+              }}
+            >
+              <Card.Title title="Personal Info" style={{ flex: 1 }} />
+              <View style={{ flexDirection: "row" }}>
+                <Tooltip title="Edit Profile">
+                  <Button onPress={() => router.push("/edit-profile")} icon="pencil" mode="text">
+                    Edit
+                  </Button>
+                </Tooltip>
+                <Tooltip title="Logout">
+                <Button onPress={() => router.push("/edit-profile")} icon="logout" mode="text">
+                    logout
+                  </Button>
+                </Tooltip>
+              </View>
+            </View>
             <Card.Content>
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <View style={{ flex: 1, alignItems: "center" }}>
@@ -83,13 +104,16 @@ const profile = () => {
               </View>
             </Card.Content>
           </Card>
+        </View>
+        <View className="p-1">
           <Card className="m-1">
             <Card.Title title="Bio" />
             <Card.Content>
               <Text variant="bodyMedium">{profile.bio}</Text>
             </Card.Content>
           </Card>
-
+        </View>
+        <View className="p-1">
           <Card className="m-1">
             <Card.Title title="Skills" />
             <Card.Content>
@@ -100,26 +124,44 @@ const profile = () => {
               />
             </Card.Content>
           </Card>
+        </View>
+        <View className="p-1">
           <Card className="m-1">
-            <Card.Title title="Work Experience" />
-            <Card.Content>
-              <FlatList
-                data={profile.workExperience}
-                renderItem={({ item }) => (
-                  <Card className="m-1">
-                    <Card.Title title={item.role} />
-                    <Card.Content>
-                      <Text variant="bodyMedium">{item.companyName}</Text>
-                      <Text variant="bodyMedium">{item.location}</Text>
-                      <Text variant="bodyMedium">
-                        {item.startDate} - {item.endDate}
-                      </Text>
-                      <Text variant="bodyMedium">{item.description}</Text>
-                    </Card.Content>
-                  </Card>
-                )}
-              />
-            </Card.Content>
+            <Card.Title title="Experience" />
+            <Divider />
+            {profile.workExperience.map((item, index) => (
+              <>
+                <Card.Title title={item.companyName} />
+                <Card.Content>
+                  <Text variant="bodyMedium">{item.role}</Text>
+                  <Text variant="bodyMedium">
+                    {item.startDate} - {item.endDate}
+                  </Text>
+                  <Text variant="bodyMedium">{item.location}</Text>
+                  <Text variant="bodyMedium">{item.description}</Text>
+                </Card.Content>
+                <Divider />
+              </>
+            ))}
+          </Card>
+        </View>
+        <View className="p-1">
+          <Card className="m-1">
+            <Card.Title title="Education" />
+            <Divider />
+            {profile.education.map((item, index) => (
+              <>
+                <Card.Title title={item.schoolName} />
+                <Card.Content>
+                  <Text variant="bodyMedium">{item.degree}</Text>
+                  <Text variant="bodyMedium">
+                    {item.startDate} - {item.endDate}
+                  </Text>
+                  <Text variant="bodyMedium">{item.location}</Text>
+                </Card.Content>
+                <Divider />
+              </>
+            ))}
           </Card>
         </View>
       </ScrollView>
