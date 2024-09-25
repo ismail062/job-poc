@@ -4,7 +4,7 @@ import InfoBox from './InfoBox';
 import JobCard from './JobCard';
 import EmptyState from './EmptyState';
 import JobFooter from './JobFooter';
-
+import SearchBar from './SearchBar';
 
 export {
     CustomButton,
@@ -13,4 +13,5 @@ export {
     JobCard,
     EmptyState,
     JobFooter,
+    SearchBar
 }
