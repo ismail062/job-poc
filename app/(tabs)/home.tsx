@@ -90,7 +90,7 @@ const Home = () => {
           </View>
         )}
         ListEmptyComponent={() => (
-          <EmptyState title="No Videos Found" subtitle="No videos created yet" />
+          <EmptyState title="No Jobs Found" subtitle="No jobs available yet" />
         )}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />

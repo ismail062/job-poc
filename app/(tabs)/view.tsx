@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, FlatList, TouchableOpacity, Text } from "react-native";
+import { View, FlatList, TouchableOpacity, RefreshControl } from "react-native";
 import { Button, Card, TextInput } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { EmptyState, JobCard, SearchBar } from "../../components";
@@ -8,8 +8,6 @@ import { router } from "expo-router";
 const view = () => {
   const [searchValue, setSearchValue] = React.useState("");
   
-  const [filteredJobsResult, setfilteredJobsResult] = useState<typeof jobSearchResult>([])
-
   const [jobSearchResult, setJobSearchResult] = useState([
     {
       $id: "1",
@@ -90,14 +88,16 @@ const view = () => {
     },
     
   ]);
+  const [filteredJobsResult, setfilteredJobsResult] = useState<typeof jobSearchResult>(jobSearchResult)
   const jobTypes = ["All", "Full-Time", "Part-Time", "Contract"];
   const [activeJobType, setActiveJobType] = useState(jobTypes[0]);
   const renderItem = ({ item }) => (
     <Button
       mode={activeJobType === item ? "contained" : "outlined"}
       onPress={() => {
+        console.log('onpress', item);
         setActiveJobType(item)
-        handleSearch(searchValue)
+        handleSearch(searchValue, item)
       }}
       className={`mx-1 ${
         activeJobType === item ? "bg-[#2db587]" : "bg-gray-300"
@@ -114,29 +114,33 @@ const view = () => {
     </Button>
   );
 
-  const handleSearch = (value: string) => {
+  const handleSearch = (value: string, item: string) => {
     //Set Job Search Result
     // Perform search operation here
+    if(!item) item = activeJobType
     let filteredJobs = [];
-    if(activeJobType === "All" && value === ""){
+    if(item === "All" && value === ""){
       setfilteredJobsResult(jobSearchResult);
-      console.log('total:', value, activeJobType, filteredJobs.length);
-
       return;
-    } else if(activeJobType === "All" && value !== ""){
+    } else if(item === "All" && value !== ""){
       filteredJobs = jobSearchResult.filter(
         (job) => job.title.toLowerCase().includes(value.toLowerCase())
       );
       setfilteredJobsResult(filteredJobs);
-      console.log('when search value:', value, activeJobType, filteredJobs.length);
       return;
+    } else {
+      filteredJobs = jobSearchResult.filter(
+        (job) => job.jobType.toLowerCase() === item?.toLowerCase() && job.title.toLowerCase().includes(value.toLowerCase()) 
+      );
+      setfilteredJobsResult(filteredJobs);
     }
-    
-    filteredJobs = jobSearchResult.filter(
-      (job) => job.jobType.toLowerCase() === activeJobType.toLocaleLowerCase() && job.title.toLowerCase().includes(value.toLowerCase()) 
-    );
-    setfilteredJobsResult(filteredJobs);
-    console.log('Searching for:', value, activeJobType, filteredJobs.length);
+  };
+
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    setRefreshing(false);
   };
 
   return (
@@ -184,6 +188,12 @@ const view = () => {
             </Card>
           </View>
         )}
+        ListEmptyComponent={() => (
+          <EmptyState title="No Jobs Found" subtitle="No job available yet" />
+        )}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       />
     </SafeAreaView>
   );

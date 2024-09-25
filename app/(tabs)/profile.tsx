@@ -5,10 +5,8 @@ import { EvilIcons, MaterialIcons } from "@expo/vector-icons";
 
 import {
   FlatList,
-  RefreshControl,
   ScrollView,
   Text,
-  TouchableOpacity,
   View,
 } from "react-native";
 
@@ -72,12 +70,12 @@ const profile = () => {
               <Card.Title title="Personal Info" style={{ flex: 1 }} />
               <View style={{ flexDirection: "row" }}>
                 <Tooltip title="Edit Profile">
-                  <Button onPress={() => router.push("/edit-profile")} icon="pencil" mode="text">
+                  <Button onPress={() => alert('Profile has been updated successfully.')} icon="pencil" mode="text">
                     Edit
                   </Button>
                 </Tooltip>
                 <Tooltip title="Logout">
-                <Button onPress={() => router.push("/edit-profile")} icon="logout" mode="text">
+                <Button onPress={() => router.push("/login")} icon="logout" mode="text">
                     logout
                   </Button>
                 </Tooltip>
@@ -119,6 +117,7 @@ const profile = () => {
             <Card.Content>
               <FlatList
                 data={profile.skills}
+                keyExtractor={(item) => item}
                 numColumns={3}
                 renderItem={({ item }) => <Chip className="m-1">{item}</Chip>}
               />

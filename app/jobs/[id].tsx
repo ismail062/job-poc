@@ -3,9 +3,24 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { JobFooter } from "@/components";
 import { EvilIcons, MaterialIcons } from "@expo/vector-icons";
+import { useState } from "react";
+
 
 const JobDetails = () => {
   const { id } = useLocalSearchParams();
+  const [job, setJob] = useState({
+    title: "Software Engineer",
+    companyName: "Google",
+    location: "Remote",
+    salary: "$120,000",
+    publishedDate: "1d ago",
+    status: "Open",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec dui sed mi ultricies aliquet. Nulla facilisi. In hac habitasse platea dictumst. Nullam nec ultricies nunc. Donec euismod, nunc non aliquam tincidunt, odio turpis ultricies metus, vitae luctus turpis erat at nunc. Donec euismod, nunc non aliquam tincidunt, odio turpis ultricies metus, vitae luctus turpis erat at nunc.",
+    respnsibility: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec dui sed mi ultricies aliquet. Nulla facilisi. In hac habitasse platea dictumst. Nullam nec ultricies nunc. Donec euismod, nunc non aliquam tincidunt, odio turpis ultricies metus, vitae luctus turpis erat at nunc. Donec euismod, nunc non aliquam tincidunt, odio turpis ultricies metus, vitae luctus turpis erat at nunc.",
+    requirement: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec dui sed mi ultricies aliquet. Nulla facilisi. In hac habitasse platea dictumst. Nullam nec ultricies nunc. Donec euismod, nunc non aliquam tincidunt, odio turpis ultricies metus, vitae luctus turpis erat at nunc. Donec euismod, nunc non aliquam tincidunt, odio turpis ultricies metus, vitae luctus turpis erat at nunc.",
+    benefits: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec dui sed mi ultricies aliquet. Nulla facilisi. In hac habitasse platea dictumst. Nullam nec ultricies nunc. Donec euismod, nunc non aliquam tincidunt, odio turpis ultricies metus, vitae luctus turpis erat at nunc. Donec euismod, nunc non aliquam tincidunt, odio turpis ultricies metus, vitae luctus turpis erat at nunc."
+  });
+  
   return (
     <SafeAreaView>
       <Stack.Screen options={{ headerTitle: "", headerBackTitle: "back" }} />
@@ -13,11 +28,11 @@ const JobDetails = () => {
         <JobFooter url={id ? `/jobs/${id}/apply` : "/jobs/applications"} />
         <ScrollView>
           <Text className="text-xl font-pbold text-gray-800">
-            Software Engineer
+            {job.title}
           </Text>
           <View className="flex flex-row items-center mt-2">
             <Text className="text-sm text-black-400 font-pregular ml-1">
-              Google
+              {job.companyName}
             </Text>
           </View>
           <View className="flex flex-row flex-wrap mt-2">
@@ -25,7 +40,7 @@ const JobDetails = () => {
               <View className="flex flex-row items-center">
                 <EvilIcons name="location" size={24} color="black" />
                 <Text className="text-sm text-black-400 font-pregular ml-2">
-                  Remote
+                  {job.location}
                 </Text>
               </View>
             </View>
@@ -38,7 +53,7 @@ const JobDetails = () => {
                   color="black"
                 />
                 <Text className="text-sm text-black-400 font-pregular ml-2">
-                  $120,000
+                  {job.salary}
                 </Text>
               </View>
             </View>
@@ -47,7 +62,7 @@ const JobDetails = () => {
               <View className="flex flex-row items-center">
                 <EvilIcons name="calendar" size={24} color="black" />
                 <Text className="text-sm text-black-400 font-pregular ml-2">
-                  1 day ago
+                  {job.publishedDate}
                 </Text>
               </View>
             </View>
@@ -60,7 +75,7 @@ const JobDetails = () => {
                   color="black"
                 />
                 <Text className="text-sm text-black-400 font-pregular ml-2">
-                  Open
+                  {job.status}
                 </Text>
               </View>
             </View>
@@ -70,12 +85,7 @@ const JobDetails = () => {
               Description
             </Text>
             <Text className="text-sm font-pregular text-gray-400 mt-1">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec
-              dui sed mi ultricies aliquet. Nulla facilisi. In hac habitasse
-              platea dictumst. Nullam nec ultricies nunc. Donec euismod, nunc
-              non aliquam tincidunt, odio turpis ultricies metus, vitae luctus
-              turpis erat at nunc. Donec euismod, nunc non aliquam tincidunt,
-              odio turpis ultricies metus, vitae luctus turpis erat at nunc.
+              {job.description}
             </Text>
           </View>
           <View className="p-4">
@@ -83,12 +93,7 @@ const JobDetails = () => {
               Responsibilities
             </Text>
             <Text className="text-sm font-pregular text-gray-400 mt-1">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec
-              dui sed mi ultricies aliquet. Nulla facilisi. In hac habitasse
-              platea dictumst. Nullam nec ultricies nunc. Donec euismod, nunc
-              non aliquam tincidunt, odio turpis ultricies metus, vitae luctus
-              turpis erat at nunc. Donec euismod, nunc non aliquam tincidunt,
-              odio turpis ultricies metus, vitae luctus turpis erat at nunc.
+              {job.respnsibility}
             </Text>
           </View>
           <View className="p-4">
@@ -96,23 +101,13 @@ const JobDetails = () => {
               Requirements
             </Text>
             <Text className="text-sm font-pregular text-gray-400 mt-1">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec
-              dui sed mi ultricies aliquet. Nulla facilisi. In hac habitasse
-              platea dictumst. Nullam nec ultricies nunc. Donec euismod, nunc
-              non aliquam tincidunt, odio turpis ultricies metus, vitae luctus
-              turpis erat at nunc. Donec euismod, nunc non aliquam tincidunt,
-              odio turpis ultricies metus, vitae luctus turpis erat at nunc.
+              {job.requirement}
             </Text>
           </View>
           <View className="p-4">
             <Text className="text-lg font-pbold text-gray-800">Benefits</Text>
             <Text className="text-sm font-pregular text-gray-400 mt-1">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec
-              dui sed mi ultricies aliquet. Nulla facilisi. In hac habitasse
-              platea dictumst. Nullam nec ultricies nunc. Donec euismod, nunc
-              non aliquam tincidunt, odio turpis ultricies metus, vitae luctus
-              turpis erat at nunc. Donec euismod, nunc non aliquam tincidunt,
-              odio turpis ultricies metus, vitae luctus turpis erat at nunc.
+              {job.benefits}
             </Text>
           </View>
         </ScrollView>
