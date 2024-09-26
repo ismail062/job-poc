@@ -95,7 +95,6 @@ const view = () => {
     <Button
       mode={activeJobType === item ? "contained" : "outlined"}
       onPress={() => {
-        console.log('onpress', item);
         setActiveJobType(item)
         handleSearch(searchValue, item)
       }}
@@ -107,7 +106,7 @@ const view = () => {
         color: activeJobType === item ? "white" : "gray",
         alignContent: "center",
       }}
-      contentStyle={{ height: 35 }}
+      contentStyle={{ height: 40 }}
       style={{ minWidth: 60 }}
     >
       {item}

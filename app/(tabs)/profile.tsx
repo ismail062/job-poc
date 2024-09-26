@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Avatar, Chip, Card, Divider, IconButton, Tooltip, Button } from "react-native-paper";
-import { EvilIcons, MaterialIcons } from "@expo/vector-icons";
-
+import { ScrollView } from "react-native";
+import { Text, View } from "react-native";
 import {
-  FlatList,
-  ScrollView,
-  Text,
-  View,
-} from "react-native";
+  Avatar,
+  List,
+  Chip,
+  Card,
+  Divider,
+  IconButton,
+  Tooltip,
+  Button,
+} from "react-native-paper";
 
 import { router } from "expo-router";
 
@@ -52,105 +55,105 @@ const profile = () => {
     skills: ["React", "Node.js", "MongoDB", "Express.js"],
   });
 
-  const LeftContent = (props) => <Avatar.Icon {...props} icon="image" />;
-
   return (
-    <SafeAreaView className="bg-primary">
-      <ScrollView>
-        <View className="p-1">
-          <Card className="m-1">
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "space-between",
-                padding: 16,
-              }}
-            >
-              <Card.Title title="Personal Info" style={{ flex: 1 }} />
-              <View style={{ flexDirection: "row" }}>
-                <Tooltip title="Edit Profile">
-                  <Button onPress={() => alert('Profile has been updated successfully.')} icon="pencil" mode="text">
-                    Edit
-                  </Button>
-                </Tooltip>
-                <Tooltip title="Logout">
-                <Button onPress={() => router.push("/login")} icon="logout" mode="text">
-                    logout
-                  </Button>
-                </Tooltip>
+    <SafeAreaView>
+      <View className="p-1">
+        <Card className="m-1">
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: 16,
+            }}
+          >
+            <Card.Title title="Personal Info" style={{ flex: 1 }} />
+            <View style={{ flexDirection: "row" }}>
+              <Tooltip title="Edit Profile">
+                <Button
+                  onPress={() =>
+                    alert("Profile has been updated successfully.")
+                  }
+                  icon="pencil"
+                  mode="text"
+                >
+                  Edit
+                </Button>
+              </Tooltip>
+              <Tooltip title="Logout">
+                <Button
+                  onPress={() => router.push("/login")}
+                  icon="logout"
+                  mode="text"
+                >
+                  logout
+                </Button>
+              </Tooltip>
+            </View>
+          </View>
+          <Card.Content>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <View style={{ flex: 1, alignItems: "center" }}>
+                <Avatar.Image
+                  size={100}
+                  source={{ uri: profile.personalInfo.avatar }}
+                />
+              </View>
+              <View style={{ flex: 2, marginLeft: 16 }}>
+                <Text variant="titleLarge">
+                  {profile.personalInfo.fullName}
+                </Text>
+                <Text variant="bodyMedium">{profile.personalInfo.email}</Text>
+                <Text variant="bodyMedium">{profile.personalInfo.phone}</Text>
+                <Text variant="bodyMedium">
+                  {profile.personalInfo.location}
+                </Text>
               </View>
             </View>
-            <Card.Content>
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <View style={{ flex: 1, alignItems: "center" }}>
-                  <Avatar.Image
-                    size={100}
-                    source={{ uri: profile.personalInfo.avatar }}
-                  />
-                </View>
-                <View style={{ flex: 2, marginLeft: 16 }}>
-                  <Text variant="titleLarge">
-                    {profile.personalInfo.fullName}
-                  </Text>
-                  <Text variant="bodyMedium">{profile.personalInfo.email}</Text>
-                  <Text variant="bodyMedium">{profile.personalInfo.phone}</Text>
-                  <Text variant="bodyMedium">
-                    {profile.personalInfo.location}
-                  </Text>
-                </View>
-              </View>
-            </Card.Content>
-          </Card>
-        </View>
-        <View className="p-1">
-          <Card className="m-1">
-            <Card.Title title="Bio" />
-            <Card.Content>
-              <Text variant="bodyMedium">{profile.bio}</Text>
-            </Card.Content>
-          </Card>
-        </View>
-        <View className="p-1">
-          <Card className="m-1">
-            <Card.Title title="Skills" />
-            <Card.Content>
-              <FlatList
-                data={profile.skills}
-                keyExtractor={(item) => item}
-                numColumns={3}
-                renderItem={({ item }) => <Chip className="m-1">{item}</Chip>}
-              />
-            </Card.Content>
-          </Card>
-        </View>
-        <View className="p-1">
-          <Card className="m-1">
-            <Card.Title title="Experience" />
-            <Divider />
-            {profile.workExperience.map((item, index) => (
-              <>
-                <Card.Title title={item.companyName} />
-                <Card.Content>
-                  <Text variant="bodyMedium">{item.role}</Text>
-                  <Text variant="bodyMedium">
-                    {item.startDate} - {item.endDate}
-                  </Text>
-                  <Text variant="bodyMedium">{item.location}</Text>
-                  <Text variant="bodyMedium">{item.description}</Text>
-                </Card.Content>
-                <Divider />
-              </>
-            ))}
-          </Card>
-        </View>
-        <View className="p-1">
-          <Card className="m-1">
-            <Card.Title title="Education" />
-            <Divider />
+          </Card.Content>
+        </Card>
+      </View>
+      <ScrollView>
+        <Card className="m-1">
+          <Card.Title title="Bio" />
+          <Card.Content>
+            <Text variant="bodyMedium">{profile.bio}</Text>
+          </Card.Content>
+        </Card>
+        <List.AccordionGroup>
+          <List.Accordion title="Skills" id="1">
+            <Card className="m-1">
+              <Card.Content className="flex-row flex-wrap">
+                {profile.skills.map((item, index) => (
+                  <Chip className="m-1" key={index}>
+                    {item}
+                  </Chip>
+                ))}
+              </Card.Content>
+            </Card>
+          </List.Accordion>
+          <List.Accordion title="Experience" id="2">
+            <Card className="m-1">
+              {profile.workExperience.map((item, index) => (
+                <>
+                  <Card.Title title={item.companyName} key={index} />
+                  <Card.Content>
+                    <Text variant="bodyMedium">{item.role}</Text>
+                    <Text variant="bodyMedium">
+                      {item.startDate} - {item.endDate}
+                    </Text>
+                    <Text variant="bodyMedium">{item.location}</Text>
+                    <Text variant="bodyMedium">{item.description}</Text>
+                  </Card.Content>
+                  <Divider />
+                </>
+              ))}
+            </Card>
+          </List.Accordion>
+          <List.Accordion title="Education" id="3">
             {profile.education.map((item, index) => (
               <>
-                <Card.Title title={item.schoolName} />
+                <Card.Title title={item.schoolName} key={index} />
                 <Card.Content>
                   <Text variant="bodyMedium">{item.degree}</Text>
                   <Text variant="bodyMedium">
@@ -161,8 +164,8 @@ const profile = () => {
                 <Divider />
               </>
             ))}
-          </Card>
-        </View>
+          </List.Accordion>
+        </List.AccordionGroup>
       </ScrollView>
     </SafeAreaView>
   );
