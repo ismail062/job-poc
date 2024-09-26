@@ -9,8 +9,8 @@ import { CustomButton, FormField } from "../../components";
 const login = () => {
   const [isSubmitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
-    email: "",
-    password: "",
+    email: "ismail@gmail.com",
+    password: "1234567",
   });
 
   const submit = async () => {
@@ -27,8 +27,13 @@ const login = () => {
     setSubmitting(true);
 
     try {
-      Alert.alert("Success", "User signed in successfully");
+      if(form.password === "1234567") {
+        Alert.alert("Success", "User signed in successfully");
       router.replace("/home");
+      } else {
+        Alert.alert("Error", "Invalid email or password");
+      }
+      
     } catch (error) {
       Alert.alert("Error", error.message);
     } finally {
