@@ -3,7 +3,7 @@ import { Link, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View, Text, ScrollView, Dimensions, Alert, Image } from "react-native";
 import { emailRegex } from "../../constants";
-
+import { loginUser } from "../../services/appWrite";
 import { CustomButton, FormField } from "../../components";
 
 const login = () => {
@@ -27,7 +27,10 @@ const login = () => {
     setSubmitting(true);
 
     try {
-      if(form.password === "1234567") {
+      const user = loginUser(form.email, form.password);
+      console.log('user login screen', user);
+    
+      if(user) {
         Alert.alert("Success", "User signed in successfully");
       router.replace("/home");
       } else {

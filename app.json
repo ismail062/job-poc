@@ -13,7 +13,8 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "pakcage": "com.job.poc.uk"
     },
     "android": {
       "adaptiveIcon": {

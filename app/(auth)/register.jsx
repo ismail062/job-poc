@@ -5,14 +5,15 @@ import { View, Text, ScrollView, Dimensions, Alert, } from "react-native";
 import { emailRegex } from "../../constants";
 
 import { CustomButton, FormField } from "../../components";
+import { registerUser } from "../../services/appWrite";
 
 
 const register = () => {
   const [isSubmitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
-    email: "",
-    password: "",
-    confirm_password: "",
+    email: "ismail062@gmail.com",
+    password: "12345678",
+    confirm_password: "12345678",
   });
 
   const submit = async () => {
@@ -31,9 +32,18 @@ const register = () => {
         return;
     }
 
+    if(form.password.length < 8) {
+      Alert.alert("Error", "Passwords must be at least 8 characters long");
+      return;
+  }
+
     setSubmitting(true);
     try {
-      router.replace("/home");
+      const newUser = registerUser(form.email, form.password);
+      if(newUser) {
+        router.replace("/login");
+        alert("User registered successfully. Login to continue");
+      }
     } catch (error) {
       Alert.alert("Error", error.message);
     } finally {
